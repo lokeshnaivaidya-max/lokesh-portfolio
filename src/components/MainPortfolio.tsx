@@ -754,7 +754,7 @@ export default function MainPortfolio() {
       {/* 2. LIVE SCENIC SCROLL BLOCKS LAYER */}
       
       {/* HERO SECTION */}
-      <section id="hero-section" className="relative min-h-screen w-full flex items-center justify-center pt-32 pb-24 px-8 md:px-20 z-30 overflow-hidden text-left">
+      <section id="hero-section" className="relative min-h-screen w-full flex items-center justify-center pt-32 pb-24 px-8 md:px-20 z-30 overflow-hidden text-left color-bg-primary">
         {/* Animated Background Orbs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
           <div className="absolute top-[20%] left-[10%] w-80 h-80 bg-[#C5A880]/5 dark:bg-[#C5A880]/10 rounded-full blur-[110px] animate-float-slow" />
@@ -859,15 +859,15 @@ export default function MainPortfolio() {
       </section>
 
       {/* ABOUT & EXPERIENCE */}
-      <section id="about-section" className="relative min-h-[120vh] w-full flex flex-col justify-center px-8 md:px-20 py-20 z-30 border-t color-border-primary">
+      <section id="about-section" className="relative min-h-[120vh] w-full flex flex-col justify-center px-8 md:px-20 py-20 z-30 border-t color-border-primary color-bg-primary">
         {/* Glow backdrop strip */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2 h-[350px] bg-gradient-to-r from-[#C5A880]/3 to-transparent blur-3xl pointer-events-none" />
 
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "300px 0px 100px 0px", amount: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10"
         >
           <div className="space-y-6">
@@ -948,12 +948,12 @@ export default function MainPortfolio() {
 
       {/* EDUCATION */}
       {educationList.length > 0 && (
-        <section id="education-section" className="relative min-h-screen w-full flex flex-col justify-center px-8 md:px-20 py-20 z-30 border-t color-border-primary">
+        <section id="education-section" className="relative min-h-screen w-full flex flex-col justify-center px-8 md:px-20 py-20 z-30 border-t color-border-primary color-bg-primary">
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "300px 0px 100px 0px", amount: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-7xl mx-auto w-full relative z-10 space-y-12"
           >
             <div className="text-center space-y-2">
@@ -1017,7 +1017,7 @@ export default function MainPortfolio() {
       )}
 
       {/* TECH STACK (HORIZONTAL SCROLLING MARQUEE FROM RIGHT TO LEFT) */}
-      <section id="skills-section" className="relative min-h-[90vh] w-full flex flex-col justify-center py-20 z-30 border-t color-border-primary overflow-hidden">
+      <section id="skills-section" className="relative min-h-[90vh] w-full flex flex-col justify-center py-20 z-30 border-t color-border-primary overflow-hidden color-bg-primary">
         {/* Overhead subtle highlight poles */}
         <div className="absolute top-0 left-[15%] w-[3px] h-48 bg-gradient-to-b from-[#C5A880] to-[#C5A880]/10 opacity-30 z-0 pointer-events-none" />
         <div className="absolute top-0 right-[25%] w-[3px] h-64 bg-gradient-to-b from-white to-white/10 opacity-25 z-0 pointer-events-none" />
@@ -1026,10 +1026,10 @@ export default function MainPortfolio() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,var(--border-primary)_1px,transparent_1px),linear-gradient(to_bottom,var(--border-primary)_1px,transparent_1px)] bg-[size:48px_48px] opacity-15 z-0 pointer-events-none" />
         
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "300px 0px 100px 0px", amount: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-7xl mx-auto w-full relative z-10"
         >
           <div className="px-8 md:px-20 mb-10">
@@ -1189,15 +1189,15 @@ export default function MainPortfolio() {
       </section>
 
       {/* PROJECT SHOWCASE */}
-      <section id="projects-section" className="relative min-h-[120vh] w-full flex flex-col justify-start px-8 md:px-20 py-24 z-30 border-t color-border-primary">
+      <section id="projects-section" className="relative min-h-[120vh] w-full flex flex-col justify-start px-8 md:px-20 py-24 z-30 border-t color-border-primary color-bg-primary">
         {/* Subtle motion trails in background */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#C5A880]/[0.02] rounded-full blur-[120px] pointer-events-none z-0" />
 
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "300px 0px 100px 0px", amount: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-7xl mx-auto w-full relative z-10 space-y-16"
         >
           
@@ -1385,15 +1385,15 @@ export default function MainPortfolio() {
       </section>
 
       {/* CONTACT & CONNECT (FULLY UNBLURRED & ALWAYS CLEAR) */}
-      <section id="contact-section" className="relative min-h-screen w-full flex flex-col justify-center px-8 md:px-20 py-24 z-30 border-t color-border-primary">
+      <section id="contact-section" className="relative min-h-screen w-full flex flex-col justify-center px-8 md:px-20 py-24 z-30 border-t color-border-primary color-bg-primary">
         {/* Soft centered light behind contact cards */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#C5A880]/[0.03] rounded-full blur-[160px] pointer-events-none" />
 
         <motion.div 
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+          viewport={{ once: true, margin: "300px 0px 100px 0px", amount: 0 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           id="contact-content-wrapper"
           className="max-w-4xl mx-auto w-full relative z-10 space-y-12"
         >
