@@ -1,14 +1,24 @@
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
 import './index.css';
-import { applyMetadata } from './lib/supabase.ts';
+import { BrandingProvider, initBranding } from './components/BrandingProvider.tsx';
 
-// Immediately apply cached metadata (favicon, opengraph) on initial script evaluation
-applyMetadata();
+async function startApp() {
+  // Fetch branding metadata (favicon, logo) & preload images BEFORE rendering
+  const initialBranding = await initBranding();
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+  const container = document.getElementById('root');
+  if (container) {
+    createRoot(container).render(
+      <StrictMode>
+        <BrandingProvider initialBranding={initialBranding}>
+          <App />
+        </BrandingProvider>
+      </StrictMode>,
+    );
+  }
+}
+
+startApp();
+

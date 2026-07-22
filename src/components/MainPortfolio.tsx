@@ -8,6 +8,7 @@ import {
 } from '../lib/supabase';
 import { Project, Experience, TechStack, Education, Certification } from '../types';
 import TechIcon from './TechIcon';
+import { useBranding } from './BrandingProvider';
 import { 
   Compass, ArrowRight, Mail, Phone, Github, 
   Linkedin, Award, Flame, Star, Sparkles,
@@ -171,6 +172,7 @@ function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
 export default function MainPortfolio() {
   const navigate = useNavigate();
 
+  const brandingContext = useBranding();
   const initialMeta = getCachedMetadata();
   const initialAvatar = getCachedAvatarUrl();
 
@@ -181,10 +183,16 @@ export default function MainPortfolio() {
   const [educationList, setEducationList] = useState<Education[]>([]);
   const [certifications, setCertifications] = useState<Certification[]>([]);
   const [resumeUrl, setResumeUrl] = useState('#');
-  const [avatarUrl, setAvatarUrl] = useState<string>(initialAvatar);
-  const [logoUrl, setLogoUrl] = useState<string>(initialMeta.logo);
-  const [isBrandingReady, setIsBrandingReady] = useState<boolean>(false);
+  const [avatarUrl, setAvatarUrl] = useState<string>(brandingContext.avatarUrl || initialAvatar);
+  const [logoUrl, setLogoUrl] = useState<string>(brandingContext.logoUrl || initialMeta.logo);
+  const [isBrandingReady, setIsBrandingReady] = useState<boolean>(brandingContext.isBrandingReady || false);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (brandingContext.logoUrl) setLogoUrl(brandingContext.logoUrl);
+    if (brandingContext.avatarUrl) setAvatarUrl(brandingContext.avatarUrl);
+    if (brandingContext.isBrandingReady) setIsBrandingReady(true);
+  }, [brandingContext]);
 
   const handleResumeClick = (e: React.MouseEvent) => {
     if (!resumeUrl || resumeUrl === '#' || resumeUrl.trim() === '') {
@@ -812,12 +820,16 @@ export default function MainPortfolio() {
               </div>
 
               {/* Loading Status Metrics */}
-              <div className="flex items-center justify-between w-full mt-3 font-mono text-[10px]">
-                <span className="text-gray-500 uppercase tracking-widest flex items-center gap-2">
-                  <span className="inline-block w-1.5 h-1.5 bg-[#C5A880] rounded-full animate-ping" />
-                  Initialising Experience Node...
+              <div className="flex items-center justify-between w-full mt-3.5 font-mono text-[10px]">
+                <span className="text-gray-400 uppercase tracking-widest flex items-center gap-2">
+                  <span className="inline-block w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" />
+                  {loadProgress < 25 && "Initializing Graphics & Favicon Engine..."}
+                  {loadProgress >= 25 && loadProgress < 50 && "Preloading Logo & Branding Assets..."}
+                  {loadProgress >= 50 && loadProgress < 75 && "Connecting BELVO Developer Node..."}
+                  {loadProgress >= 75 && loadProgress < 95 && "Hydrating Portfolio DB Records..."}
+                  {loadProgress >= 95 && "System Core Ready • Mounting Experience"}
                 </span>
-                <span className="text-[#C5A880] font-bold tracking-widest font-mono bg-[#141414] border border-[#222] px-2 py-0.5 rounded">
+                <span className="text-[#C5A880] font-bold tracking-widest font-mono bg-[#141414] border border-[#222] px-2.5 py-0.5 rounded shadow-sm">
                   {loadProgress}%
                 </span>
               </div>
