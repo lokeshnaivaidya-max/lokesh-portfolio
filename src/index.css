@@ -49,17 +49,17 @@ body.light-theme {
 
 /* Custom Cinematic Enhancements */
 @layer base {
-  body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+  html, body, #root {
+    background-color: var(--bg-primary, #050505);
+    color: var(--text-primary, #F8FAFC);
     overflow-x: hidden;
     font-family: var(--font-sans);
-    transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    min-height: 100vh;
   }
 
-  body.light-theme {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
+  html.light-theme, body.light-theme, body.light-theme #root {
+    background-color: var(--bg-primary, #FBFBFA);
+    color: var(--text-primary, #1C1C1A);
   }
 }
 

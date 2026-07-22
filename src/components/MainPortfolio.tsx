@@ -388,11 +388,13 @@ export default function MainPortfolio() {
     sessionStorage.setItem('lokesh_portfolio_loaded', 'true');
   };
 
-  // Sync theme with document body class
+  // Sync theme with document html & body classes
   useEffect(() => {
     if (theme === 'light') {
+      document.documentElement.classList.add('light-theme');
       document.body.classList.add('light-theme');
     } else {
+      document.documentElement.classList.remove('light-theme');
       document.body.classList.remove('light-theme');
     }
   }, [theme]);
@@ -688,7 +690,7 @@ export default function MainPortfolio() {
   }, [loading, theme]);
 
   return (
-    <div ref={containerRef} id="portfolio-container" className="color-bg-primary relative w-full font-sans overflow-x-hidden transition-colors duration-500">
+    <div ref={containerRef} id="portfolio-container" className="color-bg-primary relative w-full font-sans overflow-x-hidden min-h-screen">
       {/* Decorative Film Grain Backdrop Overlay */}
       <div id="film-grain-overlay" className="film-grain" />
 
@@ -697,7 +699,7 @@ export default function MainPortfolio() {
         <canvas 
           ref={bgCanvasRef}
           id="cinematic-smoke-canvas"
-          className="fixed inset-0 pointer-events-none z-0"
+          className="fixed inset-0 pointer-events-none z-0 color-bg-primary"
         />
       )}
 
