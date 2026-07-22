@@ -9,6 +9,7 @@ import {
 import { Project, Experience, TechStack, Education, Certification } from '../types';
 import TechIcon from './TechIcon';
 import { useBranding } from './BrandingProvider';
+import LoadingScreen from './LoadingScreen';
 import { 
   Compass, ArrowRight, Mail, Phone, Github, 
   Linkedin, Award, Flame, Star, Sparkles,
@@ -69,11 +70,14 @@ function SmartImage({
 function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (logoUrl) {
-      setLoaded(false);
       setError(false);
+      if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+        setLoaded(true);
+      }
     }
   }, [logoUrl]);
 
@@ -85,6 +89,7 @@ function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
             <div className="h-10 w-28 bg-neutral-800/60 rounded animate-pulse absolute inset-0" />
           )}
           <img
+            ref={imgRef}
             src={logoUrl}
             alt="Lokesh Logo"
             loading="eager"
@@ -92,7 +97,7 @@ function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
             {...({ fetchpriority: 'high' } as any)}
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}
-            className={`h-10 object-contain rounded transition-opacity duration-500 ${
+            className={`h-10 object-contain rounded transition-opacity duration-300 ${
               loaded ? 'opacity-100' : 'opacity-0'
             }`}
             referrerPolicy="no-referrer"
@@ -110,11 +115,14 @@ function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
 function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (avatarUrl) {
-      setLoaded(false);
       setError(false);
+      if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+        setLoaded(true);
+      }
     }
   }, [avatarUrl]);
 
@@ -126,6 +134,7 @@ function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
             <div className="absolute inset-0 bg-neutral-900/80 animate-pulse z-10" />
           )}
           <img
+            ref={imgRef}
             src={avatarUrl}
             alt="P. Lokesh"
             loading="eager"
@@ -133,7 +142,7 @@ function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
             {...({ fetchpriority: 'high' } as any)}
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}
-            className={`w-full h-full object-cover transition-all duration-700 scale-100 group-hover:scale-105 ${
+            className={`w-full h-full object-cover transition-all duration-500 scale-100 group-hover:scale-105 ${
               loaded ? 'opacity-100' : 'opacity-0'
             }`}
             referrerPolicy="no-referrer"
@@ -728,120 +737,18 @@ export default function MainPortfolio() {
           </button>
         </div>
       )}      {/* 1. CINEMATIC LOADING INITIALIZING SCREEN */}
-      <AnimatePresence>
-        {loading && (
-          <motion.div 
-            id="loading-screen"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.98, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }}
-            className="fixed inset-0 bg-[#050505] z-50 flex flex-col items-center justify-center font-sans select-none overflow-hidden"
-          >
-            {/* Skip Loader Button */}
-            <button 
-              id="skip-loader-btn"
-              onClick={skipLoader}
-              className="absolute top-6 right-6 text-xs font-mono tracking-widest text-[#C5A880] hover:text-white bg-[#111]/80 hover:bg-[#1a1a1a] border border-[#222] hover:border-[#C5A880]/50 px-4 py-2 rounded-full transition-all duration-300 uppercase z-50 cursor-pointer backdrop-blur-md flex items-center gap-2 shadow-lg"
-            >
-              <span>Skip Intro</span>
-              <span className="text-amber-400">→</span>
-            </button>
-
-            {/* Glowing Amber Background Core Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-radial from-[#C5A880]/15 via-amber-500/5 to-transparent blur-[100px] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#111111_1px,transparent_1px),linear-gradient(to_bottom,#111111_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-25 pointer-events-none" />
-
-            <div className="relative text-center w-full max-w-lg px-6 z-10 flex flex-col items-center">
-              
-              {/* Brand Logo or Monogram Emblem Badge */}
-              <div className="mb-6 relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-[#C5A880]/30 to-amber-500/30 rounded-2xl blur-sm opacity-75 animate-pulse" />
-                <div className="relative bg-[#0d0d0d] border border-[#222] p-3.5 rounded-2xl shadow-2xl flex items-center justify-center min-w-[70px] min-h-[70px]">
-                  {logoUrl ? (
-                    <img 
-                      src={logoUrl} 
-                      alt="Lokesh Logo" 
-                      loading="eager"
-                      fetchPriority="high"
-                      {...({ fetchpriority: 'high' } as any)}
-                      className="h-10 w-auto object-contain max-w-[140px]" 
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="font-display text-2xl font-bold tracking-widest text-[#C5A880]">
-                      PL
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Title Mask Pulse Reveal */}
-              <h2 id="loading-title" className="font-display text-4xl md:text-6xl tracking-[0.2em] text-white leading-none uppercase mb-3 select-none drop-shadow-[0_0_25px_rgba(197,168,128,0.15)]">
-                P. LOKESH
-              </h2>
-
-              <div id="loading-subtitle-wrapper" className="flex items-center gap-2 mb-8">
-                <span className="font-mono text-[10px] bg-[#141414] text-[#C5A880] border border-[#2A2A2A] px-3.5 py-1.5 rounded-full uppercase tracking-widest flex items-center gap-2 shadow-inner">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Full Stack Web Developer Intern @ BELVO
-                </span>
-              </div>
-
-              {/* Live Status Telemetry Monitors */}
-              <div className="grid grid-cols-3 gap-2 w-full mb-6 font-mono text-[9px]">
-                <div className="bg-[#0A0A0A] border border-[#1A1A1A] p-2 rounded-lg flex flex-col items-center">
-                  <span className="text-gray-500 uppercase tracking-wider mb-1">Favicon</span>
-                  <span className="text-emerald-400 font-bold tracking-widest flex items-center gap-1">
-                    <span className="h-1 w-1 rounded-full bg-emerald-400" /> ACTIVE
-                  </span>
-                </div>
-                <div className="bg-[#0A0A0A] border border-[#1A1A1A] p-2 rounded-lg flex flex-col items-center">
-                  <span className="text-gray-500 uppercase tracking-wider mb-1">Branding</span>
-                  <span className={`${isBrandingReady ? 'text-amber-400' : 'text-gray-400'} font-bold tracking-widest flex items-center gap-1`}>
-                    <span className={`h-1 w-1 rounded-full ${isBrandingReady ? 'bg-amber-400' : 'bg-gray-400 animate-ping'}`} /> 
-                    {isBrandingReady ? 'LOADED' : 'SYNCING'}
-                  </span>
-                </div>
-                <div className="bg-[#0A0A0A] border border-[#1A1A1A] p-2 rounded-lg flex flex-col items-center">
-                  <span className="text-gray-500 uppercase tracking-wider mb-1">System Core</span>
-                  <span className="text-[#C5A880] font-bold tracking-widest flex items-center gap-1">
-                    <span className="h-1 w-1 rounded-full bg-[#C5A880]" /> ONLINE
-                  </span>
-                </div>
-              </div>
-
-              {/* Premium Sleek Horizontal Loading Bar */}
-              <div id="loading-progress-bar-container" className="w-full bg-[#111111] border border-[#222222] h-2.5 rounded-full p-0.5 overflow-hidden relative shadow-[0_0_20px_rgba(0,0,0,0.8)]">
-                <div 
-                  className="h-full bg-gradient-to-r from-[#E8332A] via-[#F5B942] to-[#C5A880] transition-all duration-200 ease-out rounded-full shadow-[0_0_12px_rgba(197,168,128,0.4)] relative"
-                  style={{ width: `${loadProgress}%` }}
-                >
-                  <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(255,255,255,0.4)_50%,transparent_100%)] animate-shimmer" />
-                </div>
-              </div>
-
-              {/* Loading Status Metrics */}
-              <div className="flex items-center justify-between w-full mt-3.5 font-mono text-[10px]">
-                <span className="text-gray-400 uppercase tracking-widest flex items-center gap-2">
-                  <span className="inline-block w-1.5 h-1.5 bg-amber-400 rounded-full animate-ping" />
-                  {loadProgress < 25 && "Initializing Graphics & Favicon Engine..."}
-                  {loadProgress >= 25 && loadProgress < 50 && "Preloading Logo & Branding Assets..."}
-                  {loadProgress >= 50 && loadProgress < 75 && "Connecting BELVO Developer Node..."}
-                  {loadProgress >= 75 && loadProgress < 95 && "Hydrating Portfolio DB Records..."}
-                  {loadProgress >= 95 && "System Core Ready • Mounting Experience"}
-                </span>
-                <span className="text-[#C5A880] font-bold tracking-widest font-mono bg-[#141414] border border-[#222] px-2.5 py-0.5 rounded shadow-sm">
-                  {loadProgress}%
-                </span>
-              </div>
-
-              {/* Tagline Settles In */}
-              <p id="loading-tagline" className="text-gray-400 font-mono text-[10px] md:text-xs max-w-md mt-8 leading-relaxed italic border-t border-[#181818] pt-5 text-center">
-                "Crafting high-performance web systems and fluid digital interfaces."
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {loading && (
+        <LoadingScreen
+          logoUrl={logoUrl}
+          avatarUrl={avatarUrl}
+          faviconUrl={brandingContext.faviconUrl}
+          isDataReady={isBrandingReady}
+          onFinish={() => {
+            setLoading(false);
+            sessionStorage.setItem('lokesh_portfolio_loaded', 'true');
+          }}
+        />
+      )}
 
       {/* 2. LIVE SCENIC SCROLL BLOCKS LAYER */}
       

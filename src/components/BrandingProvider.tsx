@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {
   fetchMetadata,
+  fetchAvatarUrl,
   applyMetadata,
   getCachedMetadata,
   getCachedAvatarUrl,
@@ -35,10 +36,10 @@ const BrandingContext = createContext<BrandingContextType>({
 /**
  * initBranding executes BEFORE createRoot.render() in main.tsx.
  * It immediately applies cached favicon to <head> to eliminate any favicon flash,
- * fetches fresh branding metadata from Supabase/Backend, applies <head> tags,
- * preloads the logo & favicon into browser cache, and returns the initialized branding data.
+ * fetches fresh branding metadata & avatar from Supabase/Backend, applies <head> tags,
+ * preloads the logo, favicon, and profile picture into browser cache, and returns the initialized branding data.
  */
-export async function initBranding(timeoutMs = 2500): Promise<BrandingData> {
+export async function initBranding(timeoutMs = 3000): Promise<BrandingData> {
   if (typeof window === 'undefined') {
     return { ...defaultBranding, isBrandingReady: true };
   }
@@ -48,20 +49,23 @@ export async function initBranding(timeoutMs = 2500): Promise<BrandingData> {
   const cachedAvatar = getCachedAvatarUrl();
   applyMetadata(cached.logo, cached.favicon, cached.opengraph);
 
-  // 2. Fetch fresh metadata & preload branding images with safety timeout
+  // 2. Fetch fresh metadata & fresh avatar URL in parallel
   const fetchPromise = (async (): Promise<BrandingData> => {
     try {
-      const meta = await fetchMetadata().catch(() => cached);
+      const [meta, freshAvatar] = await Promise.all([
+        fetchMetadata().catch(() => cached),
+        fetchAvatarUrl().catch(() => cachedAvatar),
+      ]);
 
       const logoUrl = meta.logo || cached.logo;
       const faviconUrl = meta.favicon || cached.favicon;
       const opengraphUrl = meta.opengraph || cached.opengraph;
-      const avatarUrl = cachedAvatar;
+      const avatarUrl = freshAvatar || cachedAvatar;
 
       // Apply fresh favicon immediately to <head>
       applyMetadata(logoUrl, faviconUrl, opengraphUrl);
 
-      // Preload branding assets (logo, favicon) into browser cache before rendering
+      // Preload branding assets (logo, favicon, avatar) into browser memory before rendering
       await preloadBrandingAssets({ logo: logoUrl, favicon: faviconUrl }, avatarUrl);
 
       return {
