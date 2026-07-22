@@ -182,45 +182,88 @@ const SEED_PROJECTS: Project[] = [
 ];
 
 const SEED_TECH: TechStack[] = [
-  // Row 1: Frontend Technologies
-  { id: 't1', name: 'HTML5', icon_name: 'html5', category: 'frontend' },
-  { id: 't2', name: 'CSS3', icon_name: 'css3', category: 'frontend' },
-  { id: 't3', name: 'JavaScript', icon_name: 'javascript', category: 'frontend' },
-  { id: 't4', name: 'TypeScript', icon_name: 'typescript', category: 'frontend' },
-  { id: 't5', name: 'React', icon_name: 'react', category: 'frontend' },
-  { id: 't6', name: 'Next.js', icon_name: 'nextjs', category: 'frontend' },
-  { id: 't7', name: 'Vite', icon_name: 'vite', category: 'frontend' },
-  { id: 't8', name: 'Tailwind CSS', icon_name: 'tailwind', category: 'frontend' },
-  { id: 't9', name: 'GSAP', icon_name: 'gsap', category: 'frontend' },
-  { id: 't10', name: 'Framer Motion', icon_name: 'framermotion', category: 'frontend' },
-  { id: 't11', name: 'Three.js', icon_name: 'threejs', category: 'frontend' },
-  { id: 't12', name: 'Shadcn UI', icon_name: 'shadcnui', category: 'frontend' },
+  // Frontend
+  { id: 'f1', name: 'HTML5', icon_name: 'html5', category: 'frontend' },
+  { id: 'f2', name: 'CSS3', icon_name: 'css3', category: 'frontend' },
+  { id: 'f3', name: 'JavaScript (ES6+)', icon_name: 'javascript', category: 'frontend' },
+  { id: 'f4', name: 'TypeScript', icon_name: 'typescript', category: 'frontend' },
+  { id: 'f5', name: 'React.js', icon_name: 'react', category: 'frontend' },
+  { id: 'f6', name: 'Next.js', icon_name: 'nextjs', category: 'frontend' },
+  { id: 'f7', name: 'Vite', icon_name: 'vite', category: 'frontend' },
+  { id: 'f8', name: 'Tailwind CSS', icon_name: 'tailwind', category: 'frontend' },
+  { id: 'f9', name: 'GSAP', icon_name: 'gsap', category: 'frontend' },
+  { id: 'f10', name: 'Framer Motion', icon_name: 'framermotion', category: 'frontend' },
+  { id: 'f11', name: 'Three.js', icon_name: 'threejs', category: 'frontend' },
+  { id: 'f12', name: 'Shadcn/UI', icon_name: 'shadcnui', category: 'frontend' },
+  { id: 'f13', name: 'Radix UI', icon_name: 'radixui', category: 'frontend' },
+  { id: 'f14', name: 'React Router DOM', icon_name: 'reactrouterdom', category: 'frontend' },
+  { id: 'f15', name: 'React Hook Form', icon_name: 'reacthookform', category: 'frontend' },
+  { id: 'f16', name: 'Zod', icon_name: 'zod', category: 'frontend' },
 
-  // Row 2: Backend + Database
-  { id: 't13', name: 'Node.js', icon_name: 'nodejs', category: 'backend' },
-  { id: 't14', name: 'Express.js', icon_name: 'express', category: 'backend' },
-  { id: 't15', name: 'Python', icon_name: 'python', category: 'backend' },
-  { id: 't16', name: 'REST APIs', icon_name: 'api', category: 'backend' },
-  { id: 't17', name: 'JWT Authentication', icon_name: 'jwt', category: 'backend' },
-  { id: 't18', name: 'MongoDB', icon_name: 'mongodb', category: 'database' },
-  { id: 't19', name: 'MySQL', icon_name: 'mysql', category: 'database' },
-  { id: 't20', name: 'Supabase', icon_name: 'supabase', category: 'database' },
-  { id: 't21', name: 'Firebase', icon_name: 'firebase', category: 'database' },
+  // Backend
+  { id: 'b1', name: 'Node.js', icon_name: 'nodejs', category: 'backend' },
+  { id: 'b2', name: 'Express.js', icon_name: 'express', category: 'backend' },
+  { id: 'b3', name: 'Python', icon_name: 'python', category: 'backend' },
+  { id: 'b4', name: 'REST APIs', icon_name: 'restapis', category: 'backend' },
+  { id: 'b5', name: 'JWT Authentication', icon_name: 'jwtauthentication', category: 'backend' },
+  { id: 'b6', name: 'OAuth Authentication', icon_name: 'oauthauthentication', category: 'backend' },
+  { id: 'b7', name: 'CRUD Operations', icon_name: 'crudoperations', category: 'backend' },
+  { id: 'b8', name: 'File Upload Systems', icon_name: 'fileuploadsystems', category: 'backend' },
 
-  // Row 3: AI + Cloud + Development Tools
-  { id: 't22', name: 'Google Gemini API', icon_name: 'gemini', category: 'ai' },
-  { id: 't23', name: 'OpenAI API', icon_name: 'openai', category: 'ai' },
-  { id: 't24', name: 'Groq API', icon_name: 'groq', category: 'ai' },
-  { id: 't25', name: 'Prompt Engineering', icon_name: 'promptengineering', category: 'ai' },
-  { id: 't26', name: 'Vercel', icon_name: 'vercel', category: 'tools' },
-  { id: 't27', name: 'Netlify', icon_name: 'netlify', category: 'tools' },
-  { id: 't28', name: 'Render', icon_name: 'render', category: 'tools' },
-  { id: 't29', name: 'Git', icon_name: 'git', category: 'tools' },
-  { id: 't30', name: 'GitHub', icon_name: 'github', category: 'tools' },
-  { id: 't31', name: 'VS Code', icon_name: 'vscode', category: 'tools' },
-  { id: 't32', name: 'Postman', icon_name: 'postman', category: 'tools' },
-  { id: 't33', name: 'Figma', icon_name: 'figma', category: 'tools' },
-  { id: 't34', name: 'npm', icon_name: 'npm', category: 'tools' }
+  // Database & Backend Services
+  { id: 'd1', name: 'MongoDB', icon_name: 'mongodb', category: 'database' },
+  { id: 'd2', name: 'MySQL', icon_name: 'mysql', category: 'database' },
+  { id: 'd3', name: 'Supabase', icon_name: 'supabase', category: 'database' },
+  { id: 'd4', name: 'Firebase', icon_name: 'firebase', category: 'database' },
+  { id: 'd5', name: 'Supabase Authentication', icon_name: 'supabaseauthentication', category: 'database' },
+  { id: 'd6', name: 'Supabase Storage', icon_name: 'supabasestorage', category: 'database' },
+  { id: 'd7', name: 'Supabase Database', icon_name: 'supabasedatabase', category: 'database' },
+  { id: 'd8', name: 'Row Level Security (RLS)', icon_name: 'rowlevelsecurityrls', category: 'database' },
+
+  // AI & APIs
+  { id: 'a1', name: 'Google Gemini API', icon_name: 'googlegeminiapi', category: 'ai' },
+  { id: 'a2', name: 'OpenAI API', icon_name: 'openaiapi', category: 'ai' },
+  { id: 'a3', name: 'Groq API', icon_name: 'groqapi', category: 'ai' },
+  { id: 'a4', name: 'Prompt Engineering', icon_name: 'promptengineering', category: 'ai' },
+  { id: 'a5', name: 'API Integration', icon_name: 'apiintegration', category: 'ai' },
+
+  // Deployment & Hosting
+  { id: 'dp1', name: 'Vercel', icon_name: 'vercel', category: 'deployment' },
+  { id: 'dp2', name: 'Netlify', icon_name: 'netlify', category: 'deployment' },
+  { id: 'dp3', name: 'Render', icon_name: 'render', category: 'deployment' },
+
+  // Development Tools
+  { id: 't1', name: 'Git', icon_name: 'git', category: 'tools' },
+  { id: 't2', name: 'GitHub', icon_name: 'github', category: 'tools' },
+  { id: 't3', name: 'VS Code', icon_name: 'vscode', category: 'tools' },
+  { id: 't4', name: 'Postman', icon_name: 'postman', category: 'tools' },
+  { id: 't5', name: 'npm', icon_name: 'npm', category: 'tools' },
+  { id: 't6', name: 'Figma', icon_name: 'figma', category: 'tools' },
+
+  // Libraries & Packages
+  { id: 'l1', name: 'Axios', icon_name: 'axios', category: 'libraries' },
+  { id: 'l2', name: 'Recharts', icon_name: 'recharts', category: 'libraries' },
+  { id: 'l3', name: 'Lucide React', icon_name: 'lucidereact', category: 'libraries' },
+  { id: 'l4', name: 'React Icons', icon_name: 'reacticons', category: 'libraries' },
+  { id: 'l5', name: 'clsx', icon_name: 'clsx', category: 'libraries' },
+  { id: 'l6', name: 'date-fns', icon_name: 'datefns', category: 'libraries' },
+
+  // Core Skills
+  { id: 'cs1', name: 'Full Stack Web Development', icon_name: 'fullstackwebdevelopment', category: 'coreskills' },
+  { id: 'cs2', name: 'Responsive Web Design', icon_name: 'responsivewebdesign', category: 'coreskills' },
+  { id: 'cs3', name: 'CMS Development', icon_name: 'cmsdevelopment', category: 'coreskills' },
+  { id: 'cs4', name: 'Authentication Systems', icon_name: 'authenticationsystems', category: 'coreskills' },
+  { id: 'cs5', name: 'Admin Dashboard Development', icon_name: 'admindashboarddevelopment', category: 'coreskills' },
+  { id: 'cs6', name: 'Performance Optimization', icon_name: 'performanceoptimization', category: 'coreskills' },
+  { id: 'cs7', name: 'SEO Optimization', icon_name: 'seooptimization', category: 'coreskills' },
+  { id: 'cs8', name: 'UI/UX Development', icon_name: 'uiuxdevelopment', category: 'coreskills' },
+  { id: 'cs9', name: 'Component-Based Architecture', icon_name: 'componentbasedarchitecture', category: 'coreskills' },
+  { id: 'cs10', name: 'REST API Integration', icon_name: 'restapiintegration', category: 'coreskills' },
+  { id: 'cs11', name: 'State Management', icon_name: 'statemanagement', category: 'coreskills' },
+  { id: 'cs12', name: 'Form Validation', icon_name: 'formvalidation', category: 'coreskills' },
+  { id: 'cs13', name: 'Image Optimization', icon_name: 'imageoptimization', category: 'coreskills' },
+  { id: 'cs14', name: 'Cloud Deployment', icon_name: 'clouddeployment', category: 'coreskills' },
+  { id: 'cs15', name: 'Git Version Control', icon_name: 'gitversioncontrol', category: 'coreskills' }
 ];
 
 const SEED_EXPERIENCE: Experience[] = [
@@ -548,12 +591,27 @@ export async function deleteProject(id: string): Promise<boolean> {
 }
 
 export async function fetchTechStack(): Promise<TechStack[]> {
-  return supabaseFetch<TechStack>(
+  const result = await supabaseFetch<TechStack>(
     'tech_stack',
     (supabase) => supabase.from('tech_stack').select('*').order('created_at', { ascending: true }),
     KEYS.TECH,
     SEED_TECH
   );
+
+  if (!result || result.length < 15) {
+    setLocal(KEYS.TECH, SEED_TECH);
+    return SEED_TECH;
+  }
+
+  const existingNames = new Set(result.map((t) => t.name.toLowerCase().trim()));
+  const missing = SEED_TECH.filter((s) => !existingNames.has(s.name.toLowerCase().trim()));
+  if (missing.length > 0) {
+    const combined = [...result, ...missing];
+    setLocal(KEYS.TECH, combined);
+    return combined;
+  }
+
+  return result;
 }
 
 export async function saveTechStack(tech: Omit<TechStack, 'id'> & { id?: string }): Promise<TechStack> {

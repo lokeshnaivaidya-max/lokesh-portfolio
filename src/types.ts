@@ -21,7 +21,7 @@ export interface TechStack {
   name: string;
   icon_name: string;
   icon_url?: string;
-  category?: 'frontend' | 'backend' | 'database' | 'languages' | 'tools' | 'ai' | 'other';
+  category?: 'frontend' | 'backend' | 'database' | 'ai' | 'deployment' | 'tools' | 'libraries' | 'coreskills' | 'languages' | 'other' | string;
   display_order?: number;
   created_at?: string;
 }

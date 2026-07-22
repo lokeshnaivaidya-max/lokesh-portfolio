@@ -85,7 +85,7 @@ export default function StudioDashboard() {
   const [projGallery, setProjGallery] = useState<string[]>([]);
 
   const [newTechName, setNewTechName] = useState('');
-  const [newTechCategory, setNewTechCategory] = useState<'frontend' | 'backend' | 'database' | 'languages' | 'tools' | 'ai' | 'other'>('frontend');
+  const [newTechCategory, setNewTechCategory] = useState<string>('frontend');
   const [newTechIconUrl, setNewTechIconUrl] = useState('');
   const [editTechId, setEditTechId] = useState<string | null>(null);
 

@@ -231,10 +231,13 @@ export default function MainPortfolio() {
     return () => clearInterval(clockInterval);
   }, []);
 
-  // Tech Stack rows computed from database
-  const techRowFrontend = techStack.filter(t => t.category === 'frontend' || t.category === 'languages');
-  const techRowBackend = techStack.filter(t => t.category === 'backend' || t.category === 'database');
-  const techRowTools = techStack.filter(t => t.category === 'tools' || t.category === 'ai' || t.category === 'other' || !t.category);
+  // Selected category filter for Tech Stack
+  const [activeStackCategory, setActiveStackCategory] = useState<string>('all');
+
+  // Tech Stack rows grouped for 3 distinct infinite marquees
+  const techRowFrontend = techStack.filter(t => t.category === 'frontend' || t.category === 'libraries');
+  const techRowBackend = techStack.filter(t => t.category === 'backend' || t.category === 'database' || t.category === 'ai');
+  const techRowTools = techStack.filter(t => t.category === 'tools' || t.category === 'deployment' || t.category === 'coreskills' || !t.category);
   const defaultRow = techStack.length > 0 ? techStack : [];
   const techRow1 = techRowFrontend.length > 0 ? techRowFrontend : defaultRow;
   const techRow2 = techRowBackend.length > 0 ? techRowBackend : defaultRow;
@@ -1030,65 +1033,122 @@ export default function MainPortfolio() {
           className="max-w-7xl mx-auto w-full relative z-10"
         >
           <div className="px-8 md:px-20 mb-10">
-            <div>
-              <span id="skills-tag" className="font-mono text-xs text-neutral-500 dark:text-[#C5A880] uppercase tracking-widest font-semibold">Tech Stack</span>
-              <h2 id="skills-title" className="font-display text-5xl md:text-7xl color-text-primary tracking-wide uppercase mt-1">
-                MY STACK
-              </h2>
-              <p id="skills-desc" className="font-mono text-xs color-text-muted mt-1 uppercase tracking-wider">
-                Technologies and tools I work with every day.
-              </p>
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
+              <div>
+                <span id="skills-tag" className="font-mono text-xs text-neutral-500 dark:text-[#C5A880] uppercase tracking-widest font-semibold">Tech Stack</span>
+                <h2 id="skills-title" className="font-display text-5xl md:text-7xl color-text-primary tracking-wide uppercase mt-1">
+                  MY STACK
+                </h2>
+                <p id="skills-desc" className="font-mono text-xs color-text-muted mt-1 uppercase tracking-wider max-w-xl">
+                  Comprehensive breakdown of technologies, frameworks, tools & core engineering competencies.
+                </p>
+              </div>
+
+              {/* CATEGORY FILTER PILLS */}
+              <div className="flex flex-wrap gap-2 max-w-3xl">
+                {[
+                  { id: 'all', label: 'All Stack', count: techStack.length },
+                  { id: 'frontend', label: 'Frontend', count: techStack.filter(t => t.category === 'frontend').length },
+                  { id: 'backend', label: 'Backend', count: techStack.filter(t => t.category === 'backend').length },
+                  { id: 'database', label: 'Database & Services', count: techStack.filter(t => t.category === 'database').length },
+                  { id: 'ai', label: 'AI & APIs', count: techStack.filter(t => t.category === 'ai').length },
+                  { id: 'deployment', label: 'Deployment', count: techStack.filter(t => t.category === 'deployment').length },
+                  { id: 'tools', label: 'Dev Tools', count: techStack.filter(t => t.category === 'tools').length },
+                  { id: 'libraries', label: 'Libraries', count: techStack.filter(t => t.category === 'libraries').length },
+                  { id: 'coreskills', label: 'Core Skills', count: techStack.filter(t => t.category === 'coreskills').length },
+                ].map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveStackCategory(cat.id)}
+                    className={`font-mono text-xs px-3.5 py-1.5 rounded-full border transition-all duration-200 flex items-center gap-1.5 ${
+                      activeStackCategory === cat.id
+                        ? 'bg-[#C5A880] text-black border-[#C5A880] font-semibold shadow-lg scale-105'
+                        : 'color-bg-secondary color-border-primary color-text-muted hover:color-text-primary hover:border-[#C5A880]/50'
+                    }`}
+                  >
+                    <span>{cat.label}</span>
+                    <span className={`text-[10px] px-1.5 py-0.2 rounded-full ${activeStackCategory === cat.id ? 'bg-black/20 text-black font-bold' : 'bg-white/10 color-text-muted'}`}>
+                      {cat.count}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* 3 ROWS OF INFINITE SCROLLING MARQUEES */}
-          <div className="space-y-6 w-full relative z-10">
-            
-            {/* ROW 1: Frontend & Mobile & Languages */}
-            <div className="w-full relative overflow-hidden py-2.5 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
-              <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]">
-                {techRow1.concat(techRow1).map((tech, idx) => (
-                  <div 
-                    key={`r1-${idx}`} 
-                    className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
-                  >
-                    <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
-                    <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
-                  </div>
-                ))}
+          {/* MARQUEE SCROLLERS FOR 'ALL' CATEGORY */}
+          {activeStackCategory === 'all' && (
+            <div className="space-y-6 w-full relative z-10 mb-12">
+              {/* ROW 1: Frontend & Libraries */}
+              <div className="w-full relative overflow-hidden py-3 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
+                <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]">
+                  {techRow1.concat(techRow1).map((tech, idx) => (
+                    <div 
+                      key={`r1-${idx}`} 
+                      className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
+                    >
+                      <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
+                      <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ROW 2: Backend & Database & AI */}
+              <div className="w-full relative overflow-hidden py-3 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
+                <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]" style={{ animationDuration: '38s' }}>
+                  {techRow2.concat(techRow2).map((tech, idx) => (
+                    <div 
+                      key={`r2-${idx}`} 
+                      className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-neutral-400 dark:hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
+                    >
+                      <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
+                      <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ROW 3: Deployment, Tools & Core Skills */}
+              <div className="w-full relative overflow-hidden py-3 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
+                <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]" style={{ animationDuration: '44s' }}>
+                  {techRow3.concat(techRow3).map((tech, idx) => (
+                    <div 
+                      key={`r3-${idx}`} 
+                      className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-neutral-400 dark:hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
+                    >
+                      <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
+                      <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          )}
 
-            {/* ROW 2: Languages & Backend & Databases */}
-            <div className="w-full relative overflow-hidden py-2.5 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
-              <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]" style={{ animationDuration: '38s' }}>
-                {techRow2.concat(techRow2).map((tech, idx) => (
-                  <div 
-                    key={`r2-${idx}`} 
-                    className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-neutral-400 dark:hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
-                  >
-                    <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
-                    <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
+          {/* CATEGORIZED GRID VIEW FOR FILTERED / DETAILED VIEW */}
+          <div className="px-8 md:px-20 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+              {(activeStackCategory === 'all'
+                ? techStack
+                : techStack.filter(t => t.category === activeStackCategory)
+              ).map((tech) => (
+                <div 
+                  key={tech.id} 
+                  className="flex items-center gap-3 color-bg-secondary border color-border-primary p-3.5 rounded-xl shadow-sm hover:border-[#C5A880] hover:scale-[1.02] transition-all duration-200 group"
+                >
+                  <div className="w-9 h-9 rounded-lg bg-neutral-800/10 dark:bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:border-[#C5A880]/50 transition-colors">
+                    <TechIcon name={tech.name} size={22} iconUrl={tech.icon_url} />
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* ROW 3: AI, Cloud, Tools, UI/UX & Learnings */}
-            <div className="w-full relative overflow-hidden py-2.5 border-y color-border-primary color-bg-secondary/40 backdrop-blur-sm">
-              <div className="animate-marquee-rtl flex items-center gap-4 hover:[animation-play-state:paused]" style={{ animationDuration: '44s' }}>
-                {techRow3.concat(techRow3).map((tech, idx) => (
-                  <div 
-                    key={`r3-${idx}`} 
-                    className="flex items-center gap-3 color-bg-secondary border color-border-primary px-5 py-2.5 rounded-full shadow-md hover:border-neutral-400 dark:hover:border-[#C5A880] hover:scale-105 transition-all duration-200 cursor-default"
-                  >
-                    <TechIcon name={tech.name} size={20} iconUrl={tech.icon_url} />
-                    <span className="font-mono text-xs color-text-primary whitespace-nowrap font-medium">{tech.name}</span>
+                  <div className="overflow-hidden">
+                    <span className="font-mono text-xs color-text-primary font-medium block truncate group-hover:text-[#C5A880] transition-colors">{tech.name}</span>
+                    <span className="font-mono text-[10px] color-text-muted uppercase tracking-wider block truncate opacity-70">
+                      {tech.category === 'database' ? 'Database' : tech.category === 'coreskills' ? 'Core Skill' : tech.category || 'Tech'}
+                    </span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
-
           </div>
         </motion.div>
       </section>

@@ -54,6 +54,9 @@ export default function TechIcon({ name, className = '', size = 24, iconUrl }: T
     django: '#092E20',
     mongodb: '#47A248',
     supabase: '#3ECF8E',
+    supabaseauthentication: '#3ECF8E',
+    supabasestorage: '#3ECF8E',
+    supabasedatabase: '#3ECF8E',
     firebase: '#FFCA28',
     mysql: '#4479A1',
     c: '#A8B9CC',
@@ -91,14 +94,46 @@ export default function TechIcon({ name, className = '', size = 24, iconUrl }: T
     cicd: '#0055FF',
     jwt: '#4B32C3',
     jwtauthentication: '#4B32C3',
+    oauthauthentication: '#4285F4',
+    oauth: '#4285F4',
+    crudoperations: '#3ECF8E',
+    fileuploadsystems: '#0055FF',
+    rowlevelsecurityrls: '#E34F26',
+    rowlevelsecurity: '#E34F26',
+    rls: '#E34F26',
     vite: '#646CFF',
     shadcnui: 'var(--color-brand-adaptive)',
     shadcn: 'var(--color-brand-adaptive)',
+    radixui: '#161618',
+    reactrouterdom: '#CA4245',
+    reacthookform: '#EC5990',
+    zod: '#3E67B1',
     groq: '#F5B942',
     groqapi: '#F5B942',
     promptengineering: '#3ECF8E',
+    apiintegration: '#F05032',
     restapis: '#F05032',
     api: '#F05032',
+    axios: '#5A29E4',
+    recharts: '#22B5BF',
+    lucidereact: '#F54E00',
+    reacticons: '#61DAFB',
+    clsx: '#3178C6',
+    datefns: '#1572B6',
+    fullstackwebdevelopment: '#3ECF8E',
+    cmsdevelopment: '#F7DF1E',
+    authenticationsystems: '#FFCA28',
+    admindashboarddevelopment: '#0055FF',
+    performanceoptimization: '#F5B942',
+    seooptimization: '#00C8AC',
+    uiuxdevelopment: '#F24E1E',
+    componentbasedarchitecture: '#3178C6',
+    restapiintegration: '#F05032',
+    statemanagement: '#61DAFB',
+    formvalidation: '#3ECF8E',
+    imageoptimization: '#06B6D4',
+    clouddeployment: '#0055FF',
+    gitversioncontrol: '#F05032',
   };
 
   const matchedColor = colorMap[normName] || 'currentColor';
@@ -224,6 +259,103 @@ export default function TechIcon({ name, className = '', size = 24, iconUrl }: T
       case 'openaiapi':
       case 'openai':
         IconComponent = Fa.FaBrain;
+        break;
+      case 'radixui':
+        IconComponent = (Si as any).SiRadixui || Fa.FaCube;
+        break;
+      case 'reactrouterdom':
+      case 'reactrouter':
+        IconComponent = (Si as any).SiReactrouter || Fa.FaRoute;
+        break;
+      case 'reacthookform':
+        IconComponent = (Si as any).SiReacthookform || Fa.FaWpforms;
+        break;
+      case 'zod':
+        IconComponent = (Si as any).SiZod || Fa.FaCheckDouble;
+        break;
+      case 'oauthauthentication':
+      case 'oauth':
+        IconComponent = Fa.FaLock;
+        break;
+      case 'crudoperations':
+        IconComponent = Fa.FaDatabase;
+        break;
+      case 'fileuploadsystems':
+        IconComponent = Fa.FaCloudUploadAlt;
+        break;
+      case 'supabaseauthentication':
+      case 'supabasestorage':
+      case 'supabasedatabase':
+        IconComponent = Si.SiSupabase;
+        break;
+      case 'rowlevelsecurityrls':
+      case 'rowlevelsecurity':
+      case 'rls':
+        IconComponent = Fa.FaUserShield;
+        break;
+      case 'apiintegration':
+        IconComponent = Fa.FaPlug;
+        break;
+      case 'axios':
+        IconComponent = (Si as any).SiAxios || Fa.FaExchangeAlt;
+        break;
+      case 'recharts':
+        IconComponent = Fa.FaChartBar;
+        break;
+      case 'lucidereact':
+      case 'lucide':
+        IconComponent = (Si as any).SiLucide || Fa.FaIcons;
+        break;
+      case 'reacticons':
+        IconComponent = Si.SiReact;
+        break;
+      case 'clsx':
+        IconComponent = Fa.FaCode;
+        break;
+      case 'datefns':
+        IconComponent = Fa.FaCalendarAlt;
+        break;
+      case 'fullstackwebdevelopment':
+        IconComponent = Fa.FaLayerGroup;
+        break;
+      case 'cmsdevelopment':
+        IconComponent = Fa.FaCogs;
+        break;
+      case 'authenticationsystems':
+        IconComponent = Fa.FaKey;
+        break;
+      case 'admindashboarddevelopment':
+        IconComponent = Fa.FaTachometerAlt;
+        break;
+      case 'performanceoptimization':
+        IconComponent = Fa.FaBolt;
+        break;
+      case 'seooptimization':
+        IconComponent = Fa.FaSearch;
+        break;
+      case 'uiuxdevelopment':
+        IconComponent = Fa.FaDraftingCompass;
+        break;
+      case 'componentbasedarchitecture':
+        IconComponent = Fa.FaCubes;
+        break;
+      case 'restapiintegration':
+        IconComponent = Fa.FaCloud;
+        break;
+      case 'statemanagement':
+        IconComponent = Fa.FaSync;
+        break;
+      case 'formvalidation':
+        IconComponent = Fa.FaCheckCircle;
+        break;
+      case 'imageoptimization':
+        IconComponent = Fa.FaImage;
+        break;
+      case 'clouddeployment':
+        IconComponent = Fa.FaCloudUploadAlt;
+        break;
+      case 'gitversioncontrol':
+        IconComponent = Si.SiGit;
         break;
       case 'jwt':
       case 'jwtauthentication':
