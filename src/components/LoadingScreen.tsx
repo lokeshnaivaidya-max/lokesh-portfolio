@@ -168,7 +168,6 @@ export default function LoadingScreen({
                     alt="Lokesh Logo"
                     loading="eager"
                     fetchPriority="high"
-                    {...({ fetchpriority: 'high' } as any)}
                     className="h-11 w-auto object-contain max-w-[160px]"
                     referrerPolicy="no-referrer"
                   />

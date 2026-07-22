@@ -94,7 +94,6 @@ function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
             alt="Lokesh Logo"
             loading="eager"
             fetchPriority="high"
-            {...({ fetchpriority: 'high' } as any)}
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}
             className={`h-10 object-contain rounded transition-opacity duration-300 ${
@@ -142,7 +141,6 @@ function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
             alt="P. Lokesh"
             loading="eager"
             fetchPriority="high"
-            {...({ fetchpriority: 'high' } as any)}
             onLoad={() => setLoaded(true)}
             onError={() => setError(true)}
             className={`w-full h-full object-cover transition-all duration-500 scale-100 group-hover:scale-105 ${
