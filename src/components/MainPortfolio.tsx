@@ -112,30 +112,33 @@ function BrandHeaderLogo({ logoUrl }: { logoUrl: string }) {
   );
 }
 
+const DEFAULT_AVATAR = 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800';
+
 function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
+  const displayUrl = avatarUrl && avatarUrl.trim() !== '' ? avatarUrl : DEFAULT_AVATAR;
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (avatarUrl) {
+    if (displayUrl) {
       setError(false);
       if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
         setLoaded(true);
       }
     }
-  }, [avatarUrl]);
+  }, [displayUrl]);
 
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden border border-neutral-900 z-10 bg-neutral-950">
-      {avatarUrl && !error ? (
+      {!error ? (
         <div className="relative w-full h-full group overflow-hidden">
           {!loaded && (
             <div className="absolute inset-0 bg-neutral-900/80 animate-pulse z-10" />
           )}
           <img
             ref={imgRef}
-            src={avatarUrl}
+            src={displayUrl}
             alt="P. Lokesh"
             loading="eager"
             fetchPriority="high"
@@ -169,9 +172,6 @@ function HeroProfileAvatar({ avatarUrl }: { avatarUrl: string }) {
           <span className="font-mono text-[9px] text-[#C5A880] uppercase tracking-widest bg-[#C5A880]/10 px-3 py-1.5 rounded border border-[#C5A880]/20 mb-3">
             Aesthetic Core
           </span>
-          <p className="font-mono text-[9px] text-gray-500 uppercase tracking-widest max-w-[200px] leading-relaxed">
-            Portrait Slot Active.<br />Upload your headshot at /studio to update.
-          </p>
         </div>
       )}
     </div>
