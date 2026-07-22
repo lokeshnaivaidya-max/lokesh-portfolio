@@ -1,0 +1,8 @@
+{
+  "name": "Remix: P. Lokesh Portfolio",
+  "description": "A scroll-driven cinematic portfolio of Poosala Lokesh - Full Stack Developer \u0026 AI Engineer featuring an elegant, organic, slow-moving atmospheric smoke backdrop.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
